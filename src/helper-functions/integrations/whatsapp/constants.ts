@@ -1,0 +1,3 @@
+export const DEFAULT_CURRENCY = 'KES'
+export const PAYMENT_RETRY_LIMIT = 2
+export const SESSION_TIMEOUT_MINUTES = 30

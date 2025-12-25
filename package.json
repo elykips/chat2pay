@@ -1,0 +1,88 @@
+{
+  "name": "kwetu",
+  "description": "whatsapp-ordering-api",
+  "version": "0.0.0",
+  "homepage": "",
+  "private": true,
+  "keywords": [
+    "feathers"
+  ],
+  "author": {
+    "name": "Elkana Rop",
+    "email": "support@kwetu.co.uk"
+  },
+  "contributors": [],
+  "bugs": {},
+  "engines": {
+    "node": ">= 22.18.0"
+  },
+  "feathers": {
+    "language": "ts",
+    "packager": "npm",
+    "database": "platformDbConfig",
+    "framework": "koa",
+    "transports": [
+      "rest",
+      "websockets"
+    ],
+    "schema": "typebox"
+  },
+  "directories": {
+    "lib": "src",
+    "test": "test"
+  },
+  "files": [
+    "lib/client.js",
+    "lib/**/*.d.ts",
+    "lib/**/*.shared.js"
+  ],
+  "main": "lib/client",
+  "scripts": {
+    "dev": "nodemon -x ts-node src/index.ts",
+    "build": "tsc -b",
+    "compile": "shx rm -rf lib/ && tsc",
+    "start": "node lib/",
+    "prettier": "npx prettier \"**/*.ts\" --write",
+    "mocha": "cross-env NODE_ENV=test mocha test/ --require ts-node/register --recursive --extension .ts --exit",
+    "test": "cross-env NODE_ENV=test npm run migrate && npm run mocha",
+    "bundle:client": "npm run compile && npm pack --pack-destination ./public",
+    "migrate": "knex migrate:latest",
+    "migrate:make": "knex migrate:make"
+  },
+  "dependencies": {
+    "@feathersjs/adapter-commons": "^5.0.37",
+    "@feathersjs/authentication": "^5.0.37",
+    "@feathersjs/authentication-client": "^5.0.37",
+    "@feathersjs/configuration": "^5.0.37",
+    "@feathersjs/errors": "^5.0.37",
+    "@feathersjs/feathers": "^5.0.37",
+    "@feathersjs/knex": "^5.0.37",
+    "@feathersjs/koa": "^5.0.37",
+    "@feathersjs/schema": "^5.0.37",
+    "@feathersjs/socketio": "^5.0.37",
+    "@feathersjs/transport-commons": "^5.0.37",
+    "@feathersjs/typebox": "^5.0.37",
+    "dayjs": "^1.11.19",
+    "dotenv": "^17.2.3",
+    "knex": "^3.1.0",
+    "pg": "^8.16.3",
+    "pg-format": "^1.0.4",
+    "winston": "^3.19.0"
+  },
+  "devDependencies": {
+    "@feathersjs/cli": "^5.0.37",
+    "@feathersjs/rest-client": "^5.0.37",
+    "@types/mocha": "^10.0.10",
+    "@types/node": "^24.10.4",
+    "@types/pg": "^8.16.0",
+    "@types/pg-format": "^1.0.5",
+    "axios": "^1.13.2",
+    "cross-env": "^10.1.0",
+    "mocha": "^11.7.5",
+    "nodemon": "^3.1.11",
+    "prettier": "^3.7.4",
+    "shx": "^0.4.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.3"
+  }
+}

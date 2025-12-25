@@ -1,0 +1,24 @@
+{
+  "host": "0.0.0.0",
+  "port": 3030,
+  "public": "./public/",
+  "origins": [
+    "http://localhost:3030"
+  ],
+  "paginate": {
+    "default": 10,
+    "max": 50
+  },
+  "sharedDbConfig": {
+    "client": "pg",
+     "pool": { "min": 1, "max": 5 }
+  },
+  "platformDbConfig": {
+    "client": "pg",
+    "pool": { "min": 1, "max": 5 }
+  },
+  "opsDbConfig": {
+    "client": "pg",
+    "pool": { "min": 1, "max": 5 }
+  }
+}
