@@ -4,6 +4,7 @@ import { catalog } from './catalog/catalog'
 import { orders } from './orders/orders'
 import { vendors } from './vendors/vendors'
 import { payments } from './payments/payments'
+import { debugSession } from '../debug/sessions'
 
 export const services = (app: Application) => {
   // All services will be registered here
@@ -11,4 +12,5 @@ export const services = (app: Application) => {
     app.configure(orders)
     app.configure(payments)
     app.configure(catalog)
+    app.configure(debugSession)
 }

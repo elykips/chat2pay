@@ -1,6 +1,6 @@
 import type { Application } from '@feathersjs/koa'
 import { BadRequest } from '@feathersjs/errors'
-import { emitEvent } from '../../helper-functions/events'
+import { emitEvent } from '../../helper-functions/events/events'
 
 export const registerMpesaCallback = (app: Application) => {
   app.use(async (ctx, next) => {

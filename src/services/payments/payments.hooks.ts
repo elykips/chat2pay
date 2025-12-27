@@ -2,7 +2,7 @@ import { authenticateInternal } from '../../hooks/authenticateInternal'
 import { resolveTenantDb } from '../../hooks/resolveTenantDb'
 import { enforceCapability } from '../../hooks/enforceCapability'
 import { enforceRateLimit } from '../../hooks/enforceRateLimit'
-import { emitEvent } from '../../helper-functions/events'
+import { emitEvent } from '../../helper-functions/events/events'
 
 /**
  * After payment patch: reconcile payment result → update order status if needed.

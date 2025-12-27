@@ -2,7 +2,7 @@ import type { StateHandler } from '../types'
 import { PAYMENT_RETRY_LIMIT } from '../constants'
 
 export const paymentPending: StateHandler = async ({ message, context }) => {
-  const upper = String(message || '').trim().toUpperCase()
+  const upper = String((message as any).text || '').trim().toUpperCase()
 
   if (upper === 'STATUS') {
     const status = context.payment?.status || 'pending'

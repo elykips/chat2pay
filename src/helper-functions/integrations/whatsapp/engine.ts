@@ -22,7 +22,7 @@ export async function handleMessage({ vendorId, phone, message, db, app }: any) 
       phone,
       state: 'start',
       context: {},
-      // attempts: {},
+      attempts: 0,
       last_state_at: new Date(),
       created_at: new Date(),
       updated_at: new Date()
@@ -37,7 +37,7 @@ export async function handleMessage({ vendorId, phone, message, db, app }: any) 
       .update({
         state: 'start',
         context: {},
-        attempts: {},
+        attempts: (session.attempts ?? 0) + 1,
         last_state_at: new Date(),
         updated_at: new Date()
       })

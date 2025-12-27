@@ -2,7 +2,7 @@ import type { StateHandler } from '../types'
 import { getMenuCached } from '../menuCache'
 
 export const showMenu: StateHandler = async ({ vendorId, message, context, db }) => {
-  const text = String(message || '').trim().toUpperCase()
+  const text = String((message as any).text || '').trim().toUpperCase()
 
   if (text === 'HELP') {
     return {
@@ -31,9 +31,36 @@ export const showMenu: StateHandler = async ({ vendorId, message, context, db })
     }
   }
 
-  const lines = menu.map((i: any, idx: number) => `${idx + 1}. ${i.name} - ${i.price}`)
+  // const lines = menu.map((i: any, idx: number) => `${idx + 1}. ${i.name} - ${i.price}`)
+  // return {
+  //   reply: `📋 Menu:\n${lines.join('\n')}\n\nReply with the item number (e.g. 1) or "1 x2" for quantity.`,
+  //   nextState: 'addToCart',
+  //   contextPatch: { menu_cache_key: `menu:${vendorId}` }
+  // }
+
   return {
-    reply: `📋 Menu:\n${lines.join('\n')}\n\nReply with the item number (e.g. 1) or "1 x2" for quantity.`,
+    reply: {
+      type: 'interactive',
+      interactive: {
+        type: 'list',
+        body: {
+          text: '📋 *Our Menu*\nChoose an item:'
+        },
+        action: {
+          button: 'View Menu',
+          sections: [
+            {
+              title: 'Available Items',
+              rows: menu.map((item: any, index: number) => ({
+                id: `ADD_${item.id}`,
+                title: `${index + 1}. ${item.name}`,
+                description: `KES ${item.price}`
+              }))
+            }
+          ]
+        }
+      }
+    },
     nextState: 'addToCart',
     contextPatch: { menu_cache_key: `menu:${vendorId}` }
   }

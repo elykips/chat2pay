@@ -1,6 +1,6 @@
 import { BadRequest } from '@feathersjs/errors'
 import type { Params } from '@feathersjs/feathers'
-import { emitEvent } from '../../helper-functions/events'
+import { emitEvent } from '../../helper-functions/events/events'
 import { randomUUID } from 'crypto'
 import { Application } from '@feathersjs/koa'
 import { KnexService } from '@feathersjs/knex'
@@ -57,8 +57,15 @@ export class PaymentsService {
       updated_at: new Date()
     }
 
-    const created =await db('payments').insert(payment)
-    await emitEvent('payment.created', created)
+    await db('payments').insert(payment)
+    
+    await emitEvent('payment.created', {
+    vendor_id: vendorId,
+    payment_id: payment.id,
+    order_id: data.order_id,
+    amount: data.amount,
+    method: payment.method
+  })
 
     return payment
   }

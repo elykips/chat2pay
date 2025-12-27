@@ -1,5 +1,6 @@
 import axios from 'axios'
 import type { Application } from '@feathersjs/koa'
+import { PaymentsService } from '../../../../services/payments/payments.class'
 
 type SideEffect =
   | {
@@ -58,6 +59,9 @@ export async function runSideEffect(
           }
         }
       )
+
+      await new PaymentsService().patch(effect.payment_id, { status: 'retry' }, { internal: true })
+      
       break
     }
 

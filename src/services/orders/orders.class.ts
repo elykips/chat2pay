@@ -1,6 +1,7 @@
 import { Params } from '@feathersjs/feathers'
 import type { Application } from '@feathersjs/koa'
 import {randomUUID} from 'crypto'
+import { emitEvent } from '../../helper-functions/events/events'
 
 export class OrdersService {
   app!: Application
@@ -42,6 +43,13 @@ export class OrdersService {
     }
 
     const results = await params.knex('orders').insert(order).returning('*')
+    
+    await emitEvent('order.created', {
+  vendor_id: vendorId,
+  order_id: order.id,
+  phone: customer_phone,
+  amount
+})
 
     return results
   }

@@ -24,6 +24,7 @@ export async function getMenuCached(db: any, vendorId: string) {
     .where({ vendor_id: vendorId, active: true })
     .select('id', 'name', 'price')
     .orderBy('name', 'asc')
+    .limit(10)
 
   cache.set(key, { at: Date.now(), data: items })
   return items

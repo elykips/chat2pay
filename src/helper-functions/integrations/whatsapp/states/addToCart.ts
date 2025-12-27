@@ -2,6 +2,7 @@ import type { StateHandler, CartItem } from '../types'
 import { getMenuCached } from '../menuCache'
 
 function parseSelection(input: string) {
+  console.log('DEBUG 1 parseSelection', input)
   // formats: "1" or "1 x2" or "1x2"
   const cleaned = input.trim().toLowerCase()
   const m = cleaned.match(/^(\d+)\s*(?:x\s*(\d+))?$/) || cleaned.match(/^(\d+)x(\d+)$/)
@@ -14,7 +15,9 @@ function parseSelection(input: string) {
 }
 
 export const addToCart: StateHandler = async ({ vendorId, message, context, db }) => {
-  const text = String(message || '').trim()
+   console.log('DEBUG 1.5 addToCart', (message as any).text || (message as any).interactive?.list_reply?.id)
+  const text = (message as any)?.interactive?.list_reply?.id || String((message as any).text || '').trim()
+  console.log('DEBUG 2 addToCart', text)
 
   const upper = text.toUpperCase()
   if (upper === 'MENU') return { reply: `Opening menu…`, nextState: 'showMenu' }
@@ -28,6 +31,9 @@ export const addToCart: StateHandler = async ({ vendorId, message, context, db }
   }
 
   const parsed = parseSelection(text)
+
+  console.log('addToCart parsed: 2', parsed)
+
   if (!parsed) {
     return {
       reply: `Reply with item number (e.g. 1) or "1 x2".\nOr reply CART to review.`,

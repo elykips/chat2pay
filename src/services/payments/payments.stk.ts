@@ -1,7 +1,7 @@
 import type { Application } from '@feathersjs/koa'
 import { BadRequest, Forbidden, NotFound, Conflict } from '@feathersjs/errors'
-import { getDarajaToken, stkPassword, timestampNow, stkPush } from './../../helper-functions/integrations/mpesa/daraja'
-import { emitEvent } from '../../helper-functions/events'
+import { getDarajaToken, stkPassword, timestampNow, stkPush } from '../../helper-functions/integrations/mpesa/daraja'
+import { emitEvent } from '../../helper-functions/events/events'
 
 console.log('🔥 payments.stk.ts FILE LOADED')
 
