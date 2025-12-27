@@ -4,7 +4,8 @@
   "public": "./public/",
   "origins": [
     "http://localhost:3030",
-    "https://1d2eaa5a07e0.ngrok-free.app"
+    "https://1d2eaa5a07e0.ngrok-free.app",
+    "http://orders.kwetu.co.uk"
   ],
   "paginate": {
     "default": 10,
