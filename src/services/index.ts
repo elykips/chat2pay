@@ -5,6 +5,7 @@ import { orders } from './orders/orders'
 import { vendors } from './vendors/vendors'
 import { payments } from './payments/payments'
 import { debugSession } from '../debug/sessions'
+import { onboardingSessions } from './onboarding/onboarding-sessions'
 
 export const services = (app: Application) => {
   // All services will be registered here
@@ -13,4 +14,5 @@ export const services = (app: Application) => {
     app.configure(payments)
     app.configure(catalog)
     app.configure(debugSession)
+    app.configure(onboardingSessions);
 }

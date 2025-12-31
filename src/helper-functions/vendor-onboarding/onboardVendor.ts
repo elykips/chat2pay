@@ -110,6 +110,15 @@ export const registerVendorOnboarding = (app: Application) => {
 
     const platformDb = app.get('platformDb')
 
+    // Check for existing vendor & Avoid duplicates
+
+    const existing = await platformDb('vendors').where({ name }).first();
+
+    if (existing) {
+      return existing;
+    }
+
+
     /**
      * 1️⃣ Create vendor
      */
